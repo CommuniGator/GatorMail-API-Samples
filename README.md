@@ -16,7 +16,7 @@ The console app demonstrates connection to our SOAP web service via a web refere
 
 A couple of things must be completed before you can trigger emails through the API, namely creating an email and a campaign.
 
-Create an email as normal. Use the template HTML that we've provided. Please note - the HTML we will be inserting will replace `#[MERGEFIELD1]#`. You can have up to ten mergefields in an email, if you want to customise the email further than a single block for your future sends.
+Create an email as normal. Use the template HTML that we've provided (TemplateHTML.html). Please note - the HTML we will be inserting will replace `#[MERGEFIELD1]#`. You can have up to ten mergefields in an email, if you want to customise the email further than a single block for your future sends.
 
 Attach this email to a new campaign and make the campaign type 'Follow Up / Workflow Campaign'. This will remove the need for an audience. Set up any other details you would like to add for the campaign and then initiate it. Note the campaign ID - you can find this in the URL when in the campaign editing screen, after `itemid=`.
 
