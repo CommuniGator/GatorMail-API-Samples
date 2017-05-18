@@ -1,5 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Xml;
 using System.Reflection;
 
@@ -13,6 +17,9 @@ namespace APICustomEmails
         private string InstanceName { get; set; }
         private string Email1xml;
         private string Email2xml;
+        //private string CompEmailxml;
+        private string contactXML;
+        private string rootPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
 
 
         private API.SDK _api;
@@ -44,7 +51,7 @@ namespace APICustomEmails
         public void LoadXML()
         {
 
-            var rootPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+
 
             try
             {
@@ -55,11 +62,23 @@ namespace APICustomEmails
                 XmlDocument xml2 = new XmlDocument();
                 xml2.Load(Path.Combine(rootPath, @"Email2.xml"));
                 Email2xml = xml2.OuterXml;
-                
+
+                XmlDocument xml3 = new XmlDocument();
+                xml3.Load(Path.Combine(rootPath, @"ContactXML.xml"));
+                contactXML = xml3.OuterXml;
+
+                /*
+                XmlDocument xmlEmail = new XmlDocument();
+                xmlEmail.Load(Path.Combine(rootPath, @"CompEmail.xml"));
+                CompEmailxml = xmlEmail.OuterXml;
+                */
+
+
+
             }
             catch (FileNotFoundException)
             {
-                Console.WriteLine("Warning! XML files not found! Ensure that ExistingCustomer.xml and NewCustomer.xml are present in exe folder");
+                Console.WriteLine("Warning! XML files not found! Ensure that Email1.xml and Email2.xml are present in exe folder");
                 Console.WriteLine("Please press enter to try again");
                 Console.ReadLine();
                 LoadXML();
@@ -87,7 +106,7 @@ namespace APICustomEmails
             var result = _api.UploadContactTriggerCampaign(Email1xml);
             return result;
         }
-    
+
         //Send email 2
         public string SendEmail2()
         {
@@ -118,5 +137,41 @@ namespace APICustomEmails
 
             return result.ToString();
         }
+
+        //Create Email
+        public string CreateEmail()
+        {
+            string text;
+            using (var streamReader = new StreamReader(Path.Combine(rootPath, @"email.html"), Encoding.UTF8))
+            {
+                text = streamReader.ReadToEnd();
+            }
+
+
+            var result = _api.createEmail("testSCG", text, "ljkhdafa");
+
+            return result.ToString();
+
+        }
+
+        //Update Campaign
+        public string UpdateCampaign()
+        {
+            var date = new DateTime(2017, 03, 16);
+
+            var result = _api.updateCampaign(14285, date, "sam@supporttesting.geml1.co.uk", "Test", "sam@communigator.co.uk", "This is a test", "Attached Email", 19276);
+
+            return result.ToString();
+        }
+        //Insert Contact
+
+        public string InsertContact()
+        {
+            var result = _api.UpdateContact(contactXML);
+
+            return result;
+    
+    }
+
     }
 }

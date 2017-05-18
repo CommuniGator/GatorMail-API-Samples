@@ -1,4 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace APICustomEmails
 {
@@ -6,7 +10,7 @@ namespace APICustomEmails
     {
         static void Main(string[] args)
         {   ////SET THESE PARAMETERS FROM THE SDK USERNAME (INSTANCE ENDS IN LZ). YOU CAN ACCESS THIS IN THE FRONT END OF COMMUNIGATOR UNDER TOOLS-> INTEGRATION AND THEN THE SECURITY TAB
-            var api = new ApiCalls("USERNAME", "PASSWORD", "INSTANCENAME");
+            var api = new ApiCalls("***SDK USER***", "***SDK PASSWORD***", "***LZ NAME***");
 
 
          
@@ -18,7 +22,7 @@ namespace APICustomEmails
                 Console.WriteLine("\n");
 
                 int choice = 0;
-                Console.WriteLine("Welcome to the CommuniGator API test app, please select one of the following options (press 7 to quit):");
+                Console.WriteLine("Welcome to the CommuniGator API test app, please select one of the following options (press 0 to quit):");
 
                 do
                 {
@@ -35,12 +39,14 @@ namespace APICustomEmails
                     Console.WriteLine("4. Return campaign stats");
                     Console.WriteLine("5. Return sent emails");
                     Console.WriteLine("6. Reset counter for above");
+                    Console.WriteLine("7. Update Campaign");
+                    Console.WriteLine("8. Update Contact. Will insert if not found. (via XML)");
                     Console.WriteLine("/////////////////////////////////////");
                     var ans = Console.ReadLine();
 
 
                     choice = InputHandler(api, ans);
-                } while (choice != 7);
+                } while (choice != 0);
             
             
         }
@@ -86,6 +92,15 @@ namespace APICustomEmails
                         break;
 
                     case 7:
+                        Console.WriteLine(api.UpdateCampaign());
+                        break;
+
+                    case 8:
+                        Console.WriteLine("Updating/Inserting contact. Returned int is contactid.");
+                        Console.WriteLine(api.InsertContact());
+                        break;
+
+                    case 0:
                         break;
 
                 }
