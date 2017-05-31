@@ -20,6 +20,7 @@ namespace APICustomEmails
         //private string CompEmailxml;
         private string contactXML;
         private string rootPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+ 
 
 
         private API.SDK _api;
@@ -27,6 +28,7 @@ namespace APICustomEmails
 
 
         //Set username, password and instance name. Set URL for API commands
+        //
         public ApiCalls(string username, string password, string instancename)
         {
             _api = new API.SDK();
@@ -51,20 +53,18 @@ namespace APICustomEmails
         public void LoadXML()
         {
 
-
-
             try
             {
                 XmlDocument xml1 = new XmlDocument();
-                xml1.Load(Path.Combine(rootPath, @"Email1.xml"));
+                xml1.Load(Path.Combine(rootPath, @"data\Email1.xml"));
                 Email1xml = xml1.OuterXml;
 
                 XmlDocument xml2 = new XmlDocument();
-                xml2.Load(Path.Combine(rootPath, @"Email2.xml"));
+                xml2.Load(Path.Combine(rootPath, @"data\Email2.xml"));
                 Email2xml = xml2.OuterXml;
 
                 XmlDocument xml3 = new XmlDocument();
-                xml3.Load(Path.Combine(rootPath, @"ContactXML.xml"));
+                xml3.Load(Path.Combine(rootPath, @"data\ContactXML.xml"));
                 contactXML = xml3.OuterXml;
 
                 /*
@@ -78,8 +78,7 @@ namespace APICustomEmails
             }
             catch (FileNotFoundException)
             {
-                Console.WriteLine("Warning! XML files not found! Ensure that Email1.xml and Email2.xml are present in exe folder");
-                Console.WriteLine("Please press enter to try again");
+                Console.WriteLine("XML file error, please check code.");
                 Console.ReadLine();
                 LoadXML();
             }

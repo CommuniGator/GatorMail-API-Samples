@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<sbCommContent>
+<createLead>True</createLead>
+<sbBOName>Person</sbBOName>
+<sbBOAttrs>
+<EmailLogin><![CDATA[sam@communigator.co.uk]]></EmailLogin>
+<FirstName><![CDATA[Sam]]></FirstName>
+<LastName><![CDATA[Cavalli-Green]]></LastName>
+</sbBOAttrs>
+<sbContacts_RV></sbContacts_RV>
+</sbCommContent>
